@@ -28,9 +28,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	withCRLF := strings.ReplaceAll(
-		strings.ReplaceAll(string(inBytes), "\r\n", "\n"), // 念の為一度CRLFの可能性をゼロにして
-		"\n", "\r\n") // 改めて LF -> CRLF
+	// 元のファイルにCRが含まれていることは考慮しない。
+	withCRLF := strings.ReplaceAll(string(inBytes), "\n", "\r\n")
 
 	// 書き込み先ファイルを用意
 	sjisFile, err := os.Create(outf)
